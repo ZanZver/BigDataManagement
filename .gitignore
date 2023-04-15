@@ -1,0 +1,7 @@
+.DS_Store
+*/.DS_Store
+*.bkp
+.DS_Store
+.DS_Store
+Docker/data/*
+*.log
