@@ -3,3 +3,5 @@
 *.bkp
 .DS_Store
 .DS_Store
+Docker/data/*
+*.log
