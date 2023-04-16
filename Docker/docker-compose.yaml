@@ -1,20 +1,71 @@
 version: '3'
-
+name: neo4j_nodes
 services:
-  neo4j:
+  neo4j_0:
     image: neo4j:3.5
     restart: unless-stopped
     ports:
-      - 7474:7474
-      - 7687:7687
+      - 7470:7474
+      - 7680:7687
     volumes:
-      - ./conf:/conf
-      - ./data:/data
-      - ./import:/import
-      - ./logs:/logs
-      - ./plugins:/plugins
+      - ./neo4j_0/conf:/conf
+      - ./neo4j_0/data:/data
+      - ./neo4j_0/import:/import
+      - ./neo4j_0/logs:/logs
+      - ./neo4j_0/plugins:/plugins
     environment: 
       # Raise memory limits
-      - NEO4J_dbms_memory_pagecache_size=4G
-      - NEO4J_dbms.memory.heap.initial_size=4G
-      - NEO4J_dbms_memory_heap_max__size=4G
+      - NEO4J_dbms_memory_pagecache_size=3G
+      - NEO4J_dbms.memory.heap.initial_size=3G
+      - NEO4J_dbms_memory_heap_max__size=3G
+  neo4j_1:
+    image: neo4j:3.5
+    restart: unless-stopped
+    ports:
+      - 7471:7474
+      - 7681:7687
+    volumes:
+      - ./neo4j_1/conf:/conf
+      - ./neo4j_1/data:/data
+      - ./neo4j_1/import:/import
+      - ./neo4j_1/logs:/logs
+      - ./neo4j_1/plugins:/plugins
+    environment: 
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=3G
+      - NEO4J_dbms.memory.heap.initial_size=3G
+      - NEO4J_dbms_memory_heap_max__size=3G
+  neo4j_2:
+    image: neo4j:3.5
+    restart: unless-stopped
+    ports:
+      - 7472:7474
+      - 7682:7687
+    volumes:
+      - ./neo4j_2/conf:/conf
+      - ./neo4j_2/data:/data
+      - ./neo4j_2/import:/import
+      - ./neo4j_2/logs:/logs
+      - ./neo4j_2/plugins:/plugins
+    environment: 
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G
+  neo4j_3:
+    image: neo4j:3.5
+    restart: unless-stopped
+    ports:
+      - 7473:7474
+      - 7683:7687
+    volumes:
+      - ./neo4j_3/conf:/conf
+      - ./neo4j_3/data:/data
+      - ./neo4j_3/import:/import
+      - ./neo4j_3/logs:/logs
+      - ./neo4j_3/plugins:/plugins
+    environment: 
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G

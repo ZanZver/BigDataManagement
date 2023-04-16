@@ -5,3 +5,7 @@
 .DS_Store
 Docker/data/*
 *.log
+Docker/data/neo4j_0/*
+Docker/data/neo4j_1/*
+Docker/data/neo4j_2/*
+Docker/data/neo4j_3/*
