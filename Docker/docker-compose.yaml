@@ -14,6 +14,7 @@ services:
       - ./neo4j_0/logs:/logs
       - ./neo4j_0/plugins:/plugins
     environment: 
+      - NEO4J_AUTH=neo4j/password
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=3G
       - NEO4J_dbms.memory.heap.initial_size=3G
@@ -31,6 +32,7 @@ services:
       - ./neo4j_1/logs:/logs
       - ./neo4j_1/plugins:/plugins
     environment: 
+      - NEO4J_AUTH=neo4j/password
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=3G
       - NEO4J_dbms.memory.heap.initial_size=3G
@@ -48,6 +50,7 @@ services:
       - ./neo4j_2/logs:/logs
       - ./neo4j_2/plugins:/plugins
     environment: 
+      - NEO4J_AUTH=neo4j/password
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=1G
       - NEO4J_dbms.memory.heap.initial_size=1G
@@ -65,6 +68,7 @@ services:
       - ./neo4j_3/logs:/logs
       - ./neo4j_3/plugins:/plugins
     environment: 
+      - NEO4J_AUTH=neo4j/password
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=1G
       - NEO4J_dbms.memory.heap.initial_size=1G

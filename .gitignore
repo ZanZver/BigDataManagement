@@ -22,3 +22,4 @@ Docker/neo4j_2/data/databases/store_lock
 Docker/neo4j_2/data/dbms/auth
 Docker/neo4j_3/data/databases/store_lock
 Docker/neo4j_3/data/dbms/auth
+*.ini
