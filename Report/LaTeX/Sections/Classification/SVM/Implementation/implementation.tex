@@ -1,0 +1,71 @@
+\subsubsection{Implementation}
+
+Implementation is similar to decision tree. We are expecting training data in the function, select platform type as what to predict and vectorise he data. SVM can be optimised as well, grid was used (same as with decision trees) and cross validation was applied as well. At the end, SVM model is returned.
+\begin{listing}[H]
+\caption{SVM model function}
+\begin{minted}{python}
+def build_svm_model(x_train, y_train):
+    train_data = spark.createDataFrame
+                 (pd.concat([x_train, y_train], axis=1))
+
+    platform_indexer = StringIndexer(inputCol="platformType", 
+                                     outputCol="indexedLabel")
+    train_data = platform_indexer.fit(train_data).transform(train_data)
+
+    assembler = VectorAssembler(inputCols=["indexedLabel"], 
+                                outputCol="features")
+    train_data = assembler.transform(train_data)
+
+    svm = LinearSVC(featuresCol="features", labelCol="indexedLabel")
+
+    paramGrid = ParamGridBuilder() \
+        .addGrid(svm.maxIter, [10, 100]) \
+        .addGrid(svm.regParam, [0.1, 0.01]) \
+        .build()
+
+    ovr = OneVsRest(classifier=svm)
+
+    evaluator = MulticlassClassificationEvaluator(labelCol="indexedLabel", 
+                predictionCol="prediction", metricName="accuracy")
+    crossval = CrossValidator(estimator=ovr, estimatorParamMaps=paramGrid, 
+                              evaluator=evaluator, numFolds=5)
+
+    cvModel = crossval.fit(train_data)
+
+    return cvModel.bestModel
+\end{minted}
+\end{listing}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{listing}[H]
+% \caption{Evaluate SVM model}
+% \begin{minted}{python}
+% evaluate_model(svm_model, x_test, y_test, file_Path = file_paths_dict["classification"] + "SVM")
+% \end{minted}
+% \end{listing}

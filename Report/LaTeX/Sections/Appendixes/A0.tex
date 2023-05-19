@@ -1,0 +1,43 @@
+\subsection{A0}\label{A0}
+
+Unix time measures time passed since January 1, 1970 (00:00:00) UTC \parencite{ritchie1978unix}. With it, we have a ground truth, meaning that regardless of time zone, we can always calculate correct time.
+
+Since we have players all around the globe, the time was converted into Unix time. Another problem that was solved was transition from Pandas date time into PySpark date time. Originally, transformation was not possible, but when changed to Unix time, data type is integer, therefore there were no problems.
+
+Unix time has one drawback. It is called bug 2038. Originally the code was written for 32 bit programs, meaning that anything after 2038 (or before 1970) is not representable. Now days the computers are mostly 64 bit, therefore problem has been avoided. In order to maximise the compatibility, the team end date was set to 2038 (last possible date) instead of year 9999.
+
+Note that change was only needed for flamingo data. Chat data seems to already be in Unix time, therefore noting was needed there.
+
+\begin{listing}[H]
+\caption{Transform date to Unix time}
+\begin{minted}{python}
+def convert_date_time_to_unix(data_frame):
+    data_frame = pd.to_datetime(data_frame, format='%Y-%m-%d %H:%M:%S')
+    data_frame = data_frame.astype(int) // 10**9
+    return data_frame
+
+def convert_date_to_unix(data_frame):
+    data_frame = pd.to_datetime(data_frame, format='%Y-%m-%d %H:%M:%S')
+    data_frame = data_frame.astype(int) // 10**9
+    return data_frame
+
+data_frames = ["ad_clicks_pd", "buy_clicks_pd", "game_clicks_pd", 
+               "level_events_pd", "team_assignments_pd", 
+               "team_pd", "user_session_pd", "users_pd"]
+for df_name in data_frames:
+    if df_name == "team_pd":
+        data_loaded[df_name]["teamEndTime"] = 
+            data_loaded[df_name]["teamEndTime"]
+            .replace('9999-12-31 23:59:59', "2038-01-19 03:14:07")
+        data_loaded[df_name]["teamEndTime"] = 
+            convert_date_time_to_unix(data_loaded[df_name]["teamEndTime"])
+        data_loaded[df_name]["teamCreationTime"] =
+            convert_date_time_to_unix(data_loaded[df_name]["teamCreationTime"])
+    else:
+        data_loaded[df_name]["timestamp"] = 
+            convert_date_time_to_unix(data_loaded[df_name]["timestamp"])
+        
+data_loaded["users_pd"]["dob"] = 
+        convert_date_time_to_unix(data_loaded["users_pd"]["dob"])
+\end{minted}
+\end{listing}

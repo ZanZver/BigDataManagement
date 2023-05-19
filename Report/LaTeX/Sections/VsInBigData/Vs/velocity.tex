@@ -1,0 +1,5 @@
+\subsection{Velocity}\label{Velocity}
+
+Velocity represents frequency of data ingestion. How often we receive data depends on the system we are talking about \parencite{cappa2021big}. It can be once a second (video stream), every hour (record update), every 6 moths, etc... Frequency is important from computational point of view. If we only expect data every week, data pipeline will need to be executed one a week, otherwise if data is received every second, our pipeline needs to be running all the time (24/7).
+
+In our case, we have already received data beforehand. That means we have data at rest, we are not expecting it to change. In case we would have access to live data (with an API for example), our records would be changing based on each run.

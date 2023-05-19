@@ -1,0 +1,51 @@
+\subsection{A5}\label{A5}
+
+Two additional data frames are created in order to fill databases. One is created in order to be a collection of all the data (Mega frame) and another focuses on only advertisement data (Ads frame).
+
+Code bellow showcases how PySpark SQL can be used in order to join the data, filter and clean together.
+
+\begin{listing}[H]
+\caption{Mega frame}
+\begin{minted}{Python}
+mega_dataframe = data_users
+  .select("userId","nick","twitter", 
+        from_unixtime("dob", "yyyy-MM-dd").alias("dob"),"country")\
+  .join(data_user_session
+        .select("userId","teamId","platformType"), ["userId"], 'right')\
+  .join(data_team
+        .select("teamId","name","strength"), ["teamId"], 'left')\
+  .join(data_ad_clicks
+        .select("userId","adId","adCategory"), ["userId"], 'full')\
+  .dropDuplicates()\
+  .fillna({"strength":0})
+                
+mega_dataframe = mega_dataframe.select( 
+*[ F.when(F.col(column).isNull(),'')
+.otherwise(F.col(column))
+.alias(column) 
+for column in mega_dataframe.columns])  
+\end{minted}
+\end{listing}
+
+\begin{listing}[H]
+\caption{Ads frame}
+\begin{minted}{Python}
+ad_dataframe = data_ad_clicks
+  .select("teamId","userId","adId","adCategory")\
+  .join(data_buy_clicks.select("team","userId","price"), ["userId"], 'full')\
+  .join(data_users.select("userId","country"), ["userId"], 'full')\
+  .dropDuplicates()\
+  .fillna({
+            "teamId":0,
+            "adId":999,
+            "team":999,
+            "price":0
+            })
+                
+ad_dataframe = ad_dataframe.select( 
+*[ F.when(F.col(column).isNull(),'')
+.otherwise(F.col(column))
+.alias(column) 
+for column in ad_dataframe.columns])                
+\end{minted}
+\end{listing}

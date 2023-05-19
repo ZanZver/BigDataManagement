@@ -1,0 +1,52 @@
+\section{Clustering results on the proposed data set}\label{Clustering}
+
+\subsection{About Clustering}
+
+Clustering is a process of grouping items together based on their distance \parencite{likas2003global}. Lets take the image from bellow as an example. We have 3 classes (red, green and blue). Model calculates the distances between items (nodes) and classifies them based on how close are they between each other.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.30]{img/Clustering/Clustering.jpg}
+    \centering
+    \caption{Clustering \parencite{web:Rocketloop}}
+    \label{fig:clustering}
+\end{figure}
+
+Further explanation can be seen at \ref{A3}.
+
+Code bellow showcases how we split the data. It is similar to classification.
+\begin{listing}[H]
+\caption{Split data function}
+\begin{minted}{python}
+def train_test_split(dataframe, test_ratio=0.2):
+    dataframe = dataframe.withColumn('strength', col('strength').cast('double'))
+
+    train_df, test_df = dataframe.randomSplit
+                        ([1 - test_ratio, test_ratio], seed=42)
+
+    return train_df, test_df
+\end{minted}
+\end{listing}
+
+\newpage
+\input{Sections/Clustering/k-means/k-means}
+\newpage
+\input{Sections/Clustering/GMM/GMM}
+
+\subsection{Execute clustering code}
+Code bellow is the main part that calls the functions in order to generate the models and evaluates the models.
+
+As seen in results section, or models performed quite well. K-means seems to be the most efficient with about 30-34 clusters while GNN seems to be happy with 100 distributions.
+\begin{listing}[H]
+\caption{Execute the classification functions}
+\begin{minted}{python}
+train_df, test_df = train_test_split(mega_dataframe)
+train_df, test_df = train_test_split(mega_dataframe)
+
+evaluate_kmeans_model(train_df, test_df, 50, 
+file_Path = file_paths_dict["clustering"] + "kmenas")
+
+evaluate_gmm_model(train_df, test_df, 200, 
+file_Path = file_paths_dict["clustering"] + "gmm")
+
+\end{minted}
+\end{listing}

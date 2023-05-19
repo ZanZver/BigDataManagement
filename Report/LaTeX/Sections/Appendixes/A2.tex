@@ -1,0 +1,9 @@
+\subsection{A2}\label{A2}
+
+First we need to split the data. Split is done by training and testing. In some cases, we add third step, evaluation. More sophisticated techniques could be used (example: k-fold)
+
+Next we clean training data. In this case we make sure that there aren't any outliers, missing data or anything that could represent a problem. EDA cold help us in this case to confirm if the data looks alright. Testing data is not touched (or analysed). Data from real world is dirty therefore we need to know how it would preform against it. Another reason is bias. If we interact with the data, we could introduce human factor (bias) to it.
+
+Now we can train the model. Training data is passed to the model (decision tree or SVM in our case) with the attribute that we want to predict (example: is a person sick or not).
+
+At the end we need to evaluate the model against testing (raw) data. It is common to see confusion matrix, f1 score, accuracy, etc... since only one result is not the best representation of the model. The best practice is evaluation of the model over time which can be only done once model is deployed.

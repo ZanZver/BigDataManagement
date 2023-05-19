@@ -1,0 +1,14 @@
+\subsection{Veracity}\label{Veracity}
+Veracity represents how data is accurate, reliable and certain. To accomplish this, we can use different approaches \parencite{rubin2013veracity}. If data is stored at one storage medium (SSD/HDD/USB) and that gets damaged, we could experience data loss. The best practise is to use 3-2-1 approach \parencite{storage2012data}:
+\begin{itemize}
+    \item 3 copies of data
+    \item 2 different media
+    \item 1 copy being off-site
+\end{itemize}
+This can be achieved by using one of the cloud providers (AWS, Azure, Google Cloud, etc...) in order to save data across the word.
+
+To insure quality, we would need to restrain data either at input level or at processing. If we have complete access to the data based on its life cycle, we can impose rules at the beginning of insertion (limit age, countries available, etc...) \parencite{yu2010view}. Otherwise if we don't have access to data from the start, we can apply rules in the data processing stage.
+
+In our case, we don't need to worry about the data loss since data is hosted on GitHub \parencite{web:GitHub}. By using cloud service to host our data we don't need to worry about 3-2-1 since they are taking care of it \parencite{wang2010toward}. There are also historical versions of our files available which is beneficial. Disadvantage is that we don't control the infrastructure, meaning if GitHub (owned by Microsoft) would disappear overnight, all of the data is gone.
+
+In order to assure data quality, we are doing data transformations in the processing stage. One example is date time. In some of the files it is saved as YYYY-mm-DD HH:MM:SS while in others it is in Unix time format. Due to benefits of Unix time (deeper dive at \ref{A0}), all the time was converted to it. If we would have control from the beginning, small bugs like this could have been fixed at source.

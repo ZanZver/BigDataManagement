@@ -1,0 +1,22 @@
+\subsubsection{Implementation}
+
+Implementation is the same as with k-means. The one difference is that we are using different model.
+\begin{listing}[H]
+\caption{Create GMM model}
+\begin{minted}{python}
+def create_gmm_model(train_df, test_df, k):
+    assembler = VectorAssembler(inputCols=['strength'], outputCol='features')
+
+    x_train = assembler.transform(train_df).select('features')
+
+    x_test = assembler.transform(test_df).select('features')
+
+    gmm = GaussianMixture(k=k, seed=42)
+
+    model = gmm.fit(x_train)
+
+    predictions = model.transform(x_test)
+
+    return predictions
+\end{minted}
+\end{listing}

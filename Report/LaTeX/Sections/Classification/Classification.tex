@@ -1,0 +1,67 @@
+\section{Classification results on the proposed data set}\label{Classification}
+\subsection{About classification}
+
+Classification is a process in machine learning where we categorise data \parencite{kotsiantis2006machine}. This is used in daily bases in our lives (example: email filter, spam or not).
+
+Figure bellow showcases how people are divided into sick and healthy. Section \ref{A2} uses this as an example in order to go over 4 (main) steps that are needed.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.13]{img/Classification/Binary-Classifier-Model.png}
+    \centering
+    \caption{Classification showcase \parencite{web:S-cubed}}
+    \label{fig:classification}
+\end{figure}
+
+Code bellow showcase how the following steps were achieved. It looks similar since the idea was for code to be interchangeable regardless of the model.
+
+As mentioned, we first split the data. Split is 80\% training and 20\% testing. For reproducibility reasons, seed is set to specific number (42). In our case, x (train/test) are the features that we use for prediction and y (train/test) being the feature we are trying to predict (what platform user is on).
+\begin{listing}[H]
+\caption{Split data function}
+\begin{minted}{python}
+def split_data(data_frame):
+    indexer = StringIndexer(inputCol="platformType", 
+                            outputCol="label")
+    data_frame = indexer.fit(data_frame).transform(data_frame)
+
+    split_ratio = [0.8, 0.2]
+    seed = 42
+    train_data, test_data = data_frame.randomSplit(split_ratio, 
+                                                    seed=seed)
+
+    x_train = train_data.select("platformType").toPandas()
+    y_train = train_data.select("label").toPandas()
+
+    x_test = test_data.select("platformType").toPandas()
+    y_test = test_data.select("label").toPandas()
+
+    return x_train, x_test, y_train, y_test
+\end{minted}
+\end{listing}
+
+\newpage
+\input{Sections/Classification/DecisionTree/DecisionTree}
+\newpage
+\input{Sections/Classification/SVM/SVM}
+
+\subsection{Execute classification code}
+
+Now that we have the models ready, we can call the code bellow in order to split the data and build models.
+
+\begin{listing}[H]
+\caption{Execute the classification functions}
+\begin{minted}{python}
+x_train, x_test, y_train, y_test = split_data(mega_dataframe)
+
+dt_model = build_decision_tree_model(x_train, y_train)
+svm_model = build_svm_model(x_train, y_train)
+
+evaluate_model(dt_model, x_test, y_test, 
+file_Path = file_paths_dict["classification"] + "DecisionTree")
+
+evaluate_model(svm_model, x_test, y_test, 
+file_Path = file_paths_dict["classification"] + "SVM")
+
+\end{minted}
+\end{listing}
+
+Comparing classifications, we can see that our models did not perform the best. Based on the EDA, we know that mobile platform (iphone and android) are ~80\% of the devices used. Since our data is unbalanced, this can be a factor why results are skewed towards one end.
