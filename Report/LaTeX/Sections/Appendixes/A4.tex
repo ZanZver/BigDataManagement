@@ -1,0 +1,40 @@
+\subsection{A4}\label{A4}
+
+To setup Neo4j, we are using Docker in order to have the local environment. Docker compose code bellow showcases setup for one database, the rest (3) of them have same setup (only name is different). 
+\begin{listing}[H]
+\caption{Example Neo4j docker compose}
+\begin{minted}{yaml}
+version: '3'
+name: neo4j_nodes
+services:
+  neo4j_0:
+    image: neo4j:3.5
+    restart: unless-stopped
+    ports:
+      - 7470:7474
+      - 7680:7687
+    volumes:
+      - ./neo4j_0/conf:/conf
+      - ./neo4j_0/data:/data
+      - ./neo4j_0/import:/import
+      - ./neo4j_0/logs:/logs
+      - ./neo4j_0/plugins:/plugins
+    environment: 
+      - NEO4J_AUTH=neo4j/password
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=3G
+      - NEO4J_dbms.memory.heap.initial_size=3G
+      - NEO4J_dbms_memory_heap_max__size=3G
+\end{minted}
+\end{listing}
+
+In order for data to be inserted into the database, get\_creds function is called. It creates a connection that is passed back. Every database has its own port, therefore this needs to be specified with the input. 
+
+This setup is not recommended for the production (since it is not secure), but it works for demonstration purposes.
+\begin{listing}[H]
+\caption{Credentials}
+\begin{minted}{Python}
+def get_creds(port_end):
+    return f"bolt://localhost:768{port_end}", "neo4j", "password"
+\end{minted}
+\end{listing}

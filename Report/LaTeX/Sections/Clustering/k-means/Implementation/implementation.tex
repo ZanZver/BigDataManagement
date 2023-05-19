@@ -1,0 +1,23 @@
+\subsubsection{Implementation}
+
+In order to create the model, we pass in number of clusters, training and testing data to the function. In a similar way as with classification, the model is build in order to classify team strength. At the end, model is fitted and predictions are returned.
+
+MLlib library from PySpark was used for kmeans model.
+\begin{listing}[H]
+\caption{Create kmeans model}
+\begin{minted}{python}
+def create_kmeans_model(train_df, test_df, k):
+    assembler = VectorAssembler(inputCols=['strength'], outputCol='features')
+
+    x_train = assembler.transform(train_df).select('features')
+    x_test = assembler.transform(test_df).select('features')
+
+    kmeans = KMeans(k=k, seed=42)
+
+    model = kmeans.fit(x_train)
+
+    predictions = model.transform(x_test)
+
+    return predictions
+\end{minted}
+\end{listing}

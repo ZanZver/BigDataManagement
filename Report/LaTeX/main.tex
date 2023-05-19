@@ -1,0 +1,137 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%referencing >>>>>>>>
+\usepackage{amsmath}
+\usepackage{csquotes}% Recommended
+\usepackage[english]{babel}
+\usepackage[style=authoryear-ibid,backend=biber]{biblatex}
+\addbibresource{bibliography.bib}% Syntax for version >= 1.2
+%for minted>>>>>
+\usepackage{minted}
+  
+%others >>>>>>>>
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[center]{caption}
+\usepackage[normalem]{ulem}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{array}
+\usepackage{soul}
+\usepackage{fancyhdr}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{zed-csp}
+\usepackage{geometry}
+\usepackage{dirtree}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{pdflscape}
+\usepackage{graphicx}
+\usepackage{float}
+%for links >>>>>>
+\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,     
+    urlcolor=blue,
+    citecolor = black
+}
+\urlstyle{same}
+	
+\graphicspath{ {img/} }
+
+\title{Report title}
+\author{Zan Zver}
+\date{Report Date }
+
+\newcommand{\latex}{\LaTeX\ }
+\newcommand{\authorName}{Zan Zver}
+\newcommand{\authorID}{18133498}
+\newcommand{\reportTitle}{Big data use in Catch the pink flamingo}
+\newcommand{\degreeAward}{MSc Big Data Analytics} 
+
+\begin{document}
+\DeclareGraphicsExtensions{.jpg,.png,.gif,.pdf,.jpeg}
+\begin{titlepage}
+   \begin{center}
+       CMP7203 – Big Data Management
+       \vspace*{0.5cm}
+
+       \huge\textbf{\reportTitle} 
+
+       \vspace{0.5cm}
+        Coursework technical report
+            
+       \vspace{1.5cm}
+
+       \authorName \\
+       \authorID
+
+
+       \vfill
+            
+       \vspace{0.8cm}
+     
+       \begin{figure}[htp]
+        \centering
+        \includegraphics{logo}
+        \end{figure}
+            
+       \large{Faculty of Computing, Engineering and the Built Environment \\
+       Birmingham City University \\}
+            
+   \end{center}
+\end{titlepage}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\includegraphics[width = 3.3cm]{header.jpg}}
+\lhead{\footnotesize BIRMINGHAM CITY UNIVERSITY \\ SCHOOL OF COMPUTING AND DIGITAL TECHNOLOGY}
+\rfoot{Page \thepage}
+\newgeometry{top=110pt}
+\setlength{\headsep}{50pt}
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+
+%o	Section 0: Vs In Big Data 816/700
+\input{Sections/VsInBigData/VsInBigData.tex}
+\newpage
+%o	Section 1: Evaluation of big data processing paradigms 763/1000
+\input{Sections/BigDataProcessingParadigms/BigDataProcessingParadigms}
+\newpage
+% %o	Section 2: Exploratory data analysis. 1240 / ???
+\input{Sections/EDA/EDA.tex}
+\newpage
+% %o	Section 3: Classification results on the proposed data set. 723/700
+\input{Sections/Classification/Classification.tex}
+\newpage
+% %o	Section 4: Clustering results on the proposed data set. 475/700
+\input{Sections/Clustering/Clustering.tex}
+\newpage
+%o	Section 5: Graph analysis including ways to improve the game. 700
+\input{Sections/GraphAnalysis/GraphAnalysis.tex}
+\newpage
+%o	Section 6: Ethics, Findings & recommendations. 319/500
+\input{Sections/DataEthics/DataEthics.tex}
+\newpage
+%o	Section 7: Conclusion. 500
+\input{Sections/Conclusion/Conclusion.tex}
+\newpage
+%   Section 8: Appendixes
+\input{Sections/Appendixes/Appendixes.tex}
+\newpage
+
+\section{References}
+\printbibliography
+
+\end{document}

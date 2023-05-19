@@ -1,0 +1,39 @@
+\subsubsection{Implementation}
+
+In order to create the model, we need to pass in the training data to the function. Since data isn't numeric, we need to overcome the problem by vectorizing it (use numeric representation). To improve the score of the model, we can fine tune it. One of the ways to do so for decision tree is to fine tunde the grid and create coss-validation. At the end we fit the model and return it.
+\begin{listing}[H]
+\caption{Decision tree model function}
+\begin{minted}{python}
+def build_decision_tree_model(x_train, y_train):
+    train_data = spark.createDataFrame
+                (pd.concat([x_train, y_train], axis=1))
+
+    platform_indexer = StringIndexer(inputCol="platformType", 
+                                     outputCol="platformIndex")
+    train_data = platform_indexer.fit(train_data).transform(train_data)
+
+    assembler = VectorAssembler(inputCols=["platformIndex"], 
+                                outputCol="features")
+    train_data = assembler.transform(train_data)
+
+    dt = DecisionTreeClassifier(featuresCol="features", labelCol="label")
+
+    paramGrid = ParamGridBuilder() \
+        .addGrid(dt.maxDepth, [2, 4, 6]) \
+        .addGrid(dt.minInstancesPerNode, [1, 2, 4]) \
+        .build()
+
+    evaluator = MulticlassClassificationEvaluator(labelCol="label",
+                predictionCol="prediction", metricName="accuracy")
+    crossval = CrossValidator(estimator=dt, estimatorParamMaps=paramGrid, 
+                              evaluator=evaluator, numFolds=5)
+
+    cvModel = crossval.fit(train_data)
+
+    return cvModel.bestModel
+\end{minted}
+\end{listing}
+
+
+
+

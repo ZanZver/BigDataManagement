@@ -1,0 +1,32 @@
+\begin{center}
+\begin{longtable}{ |l|l| } 
+ \hline
+ Attribute & Description\\ 
+ \hline
+ timestamp & when the user joined the team\\ 
+ \hline
+ team & ID of the team\\ 
+ \hline
+ userId & ID of the user\\ 
+ \hline
+ assignmentId & Temp ID assigned to the user (while in the team/session)\\ 
+ \hline
+\caption{team-assignments.csv}
+\end{longtable}
+\end{center}
+
+Team assignments dataframe has no missing data.
+\begin{figure}[H]
+\includegraphics[scale=0.25]{img/Graphs/teamAssignments/missingno_teamAssignments.png}
+\centering
+\caption{missingno\_teamAssignments}
+\label{fig:missingno_teamAssignments}
+\end{figure}
+
+At the beginning of the time series, we can see quite a steep decline. This was momental, since afterwards decline of team assignments is slow. At the end, we can observe a steep decline, that matches all the time sereies so far.
+\begin{figure}[H]
+\includegraphics[scale=0.85]{img/Graphs/teamAssignments/timeseries_teamAssignments.png}
+\centering
+\caption{timeseries\_teamAssignments}
+\label{fig:timeseries_teamAssignments}
+\end{figure}

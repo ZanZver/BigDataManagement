@@ -1,0 +1,75 @@
+\subsection{Chat data}\label{EDA}
+
+Chat data is a representation between messages send by the users. The EDA for this section wouldn't make much sense, therefore it was not completed. 
+
+Reason why it doesn't make sense are attributes. Listed bellow are 6 attributes. This is all we have from the 4 files. 
+\begin{itemize}
+    \item userId
+    \item teamchat\_session\_id
+    \item date
+    \item chat\_item
+    \item chatid1
+    \item chatid1
+\end{itemize}
+
+Out of 6 attributes, 5 of them are IDs and one of them is date. Time series analysis could be done for when messages were send, but that would be it. Since majority of items are IDs, this wouldn't add much of the business value. Regardless, we can see documented attributes for each of the files bellow.
+
+\begin{center}
+\begin{longtable}{ |l|l| } 
+ \hline
+ Attribute & Description\\ 
+ \hline
+ userId & ID of the user\\ 
+ \hline
+ teamchat\_session\_id & ID of the session that team is in\\ 
+ \hline
+ date & time of the operation\\ 
+ \hline
+\caption{chat\_join\_team\_chat.csv}
+\end{longtable}
+\end{center}
+
+\begin{center}
+\begin{longtable}{ |l|l| } 
+ \hline
+ Attribute & Description\\ 
+ \hline
+ userId & ID of the user\\ 
+ \hline
+ teamchat\_session\_id & ID of the session that team is in\\ 
+ \hline
+ date & time of the operation\\ 
+ \hline
+\caption{chat\_leave\_team\_chat.csv}
+\end{longtable}
+\end{center}
+
+\begin{center}
+\begin{longtable}{ |l|l| } 
+ \hline
+ Attribute & Description\\ 
+ \hline
+ chat\_item & ID of the message that was send\\ 
+ \hline
+ user\_id & ID of the user (that send the message)\\ 
+ \hline
+ date & time when message was send\\ 
+ \hline
+\caption{chat\_mention\_team\_chat.csv}
+\end{longtable}
+\end{center}
+
+\begin{center}
+\begin{longtable}{ |l|l| } 
+ \hline
+ Attribute & Description\\ 
+ \hline
+chatid1 & ID of the message that was send\\ 
+ \hline
+chatid2 & ID of the message that got responded\\ 
+ \hline
+ date & time when chatid2 was send\\ 
+ \hline
+\caption{chat\_respond\_team\_chat.csv}
+\end{longtable}
+\end{center}

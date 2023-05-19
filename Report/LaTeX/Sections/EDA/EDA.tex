@@ -1,0 +1,48 @@
+\section{Exploratory data analysis}\label{EDA}
+
+Exploratory data analysis (EDA) is a process in which we familiarise ourselves with data \parencite{tukey1977exploratory}. Listed in the tree structure bellow are the files originally provided to us. Listed bellow can be seen split sections, based on the nested paths (chat, combined and flamingo data).
+
+\dirtree{%
+.1 DataSet.
+.2 dataset\_attribute\_desc.doc.
+.3 description of the dataset.
+.2 combined-data.csv.
+.2 chat-data.
+.3 chat\_join\_team\_chat.csv.
+.4 When a user joins a team, a new record is going to be added to this file. 
+.3 chat\_leave\_team\_chat.csv.
+.4 When a user leaves a team, a new record is going to be added to this file. 
+.3 chat\_mention\_team\_chat.csv.
+.4 When a user gets a mention, a new record is going to be added to this file. 
+.3 chat\_respond\_team\_chat.csv.
+.4 When a player with chatid2 responds to a post by another player with chatid2, a new line is added in this file.
+.2 flamingo-data.
+.3 ad-clicks.csv.
+.4 Database of clicks on ads.
+.3 buy-clicks.csv.
+.4 Database of purchases.
+.3 game-clicks.csv.
+.4 A record of each click a user performed during the game.
+.3 level-events.csv.
+.4 A record of each level event for a teams,lLevel events are recorded when a team ends or begins a new level.
+.3 team-assignments.csv.
+.4 A record of each time a user joins a team.
+.3 team.csv.
+.4 A record of each team in the game.
+.3 user-session.csv.
+.4 A record of each session a user plays.
+.3 users.csv.
+.4 Database of the game users.
+}
+
+Originally the following items were zipped:
+\begin{itemize}
+    \item chat-data.zip
+    \item combined-data.zip
+    \item flamingo-data.zip
+\end{itemize}
+
+
+\input{Sections/EDA/CombinedData/combinedData.tex}
+\input{Sections/EDA/ChatData/ChatData.tex}
+\input{Sections/EDA/FlamingoData/flamingoData.tex}
